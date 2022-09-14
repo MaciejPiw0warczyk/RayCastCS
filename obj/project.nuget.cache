@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "vjN+L65/00K8Tiao3s8OZHbKNnKgv0lPXm5VoR/X0tgZySVDtqMHM7696Qrbcisk8TF+HitOJyC25tHyqR2vsQ==",
+  "success": true,
+  "projectFilePath": "H:\\DEV\\RayCastCS 0.1\\MapCreator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\piwek\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\piwek\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\piwek\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
