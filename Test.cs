@@ -20,23 +20,7 @@ namespace MapCreator
         float[] playervert;
         float[] RayVert;
         float[] SWFVert;
-
-        float[] vertices =
-        {
-            -.5f,  .5f, 1f, 0f, 0f, // top left
-             .5f,  .5f, 0f, 1f, 0f,// top right
-            -.5f, -.5f, 0f, 0f, 1f, // bottom left
-
-             .5f,  .5f, 0f, 1f, 0f,// top right
-             .5f, -.5f, 1f, 0f, 0f, // top left
-            -.5f, -.5f, 0f, 0f, 1f, // bottom left
-        };
-        float[] q =
-        {
-            0f, 600f, 1f, 0f, 0f,
-            800f, 600f, 0f, 1f, 0f,
-            400f, 0f, 0f, 0f, 1f,
-        };
+        float[] tri;
         public enum Color
         {
             black = 0,
@@ -63,9 +47,10 @@ namespace MapCreator
             new Vector4(0.006f,0.004f,.005f,1f),
         };
 
-        float[] tri = DrawMap().ToArray();
         protected unsafe override void LoadContent()
         {
+
+            tri = DrawMap().ToArray();
 
             shader = new Shader(ShaderCode.vertexShader, ShaderCode.fragmentShader);
             shader.Load();
@@ -138,6 +123,8 @@ namespace MapCreator
 
         protected unsafe override void Update()
         {
+            Movment.MovePlayer();
+
             Player.pos = new Vector2(Player.X, Player.Y);
             Colision.ColisionPoint = new Vector2((int)(Player.X + (Player.deltaX) * 5), (int)(Player.Y + (Player.deltaY) * 5));
             Colision.NegativeColisionPoint = new Vector2((int)(Player.X - (Player.deltaX) * 5), (int)(Player.Y - (Player.deltaY) * 5));
@@ -187,43 +174,18 @@ namespace MapCreator
             SWFVAO.Unbind();
 
             { 
+                ShowFPS(DisplayManager.Window);
                 Console.WriteLine(Player.X);
                 Console.WriteLine(Player.Y);
                 Console.WriteLine(Player.angle);
-                ShowFPS(DisplayManager.Window);
+                Console.WriteLine(Movment.W);
+                Console.WriteLine(Movment.A);
+                Console.WriteLine(Movment.S);
+                Console.WriteLine(Movment.D);
                 Console.SetCursorPosition(0, 0);
             }
         }
-        protected override void Initialize() 
-        {
-            Player.X = 300;
-            Player.Y = 300;
-        }
 
-        protected override void KeyCallback(Window window, Keys key, int scanCode, InputState state, ModifierKeys mods)
-        {
-            switch (key)
-            {
-                case Keys.W:
-                    if (!Colision.Coliding(Colision.ColisionPoint))
-                    { Player.X += Player.deltaX; Player.Y += Player.deltaY; }
-                    break;
-
-                case Keys.A:
-                    { Player.angle -= 0.1f; if (Player.angle < 0) { Player.angle += 2 * (float)Math.PI; } if (Player.angle > Math.PI * 2) { Player.angle -= 2 * (float)Math.PI; } Player.deltaX = (float)Math.Cos(Player.angle) * 5; Player.deltaY = (float)(Math.Sin(Player.angle) * 5); }
-                    break;
-
-                case Keys.S:
-                    if (!Colision.Coliding(Colision.NegativeColisionPoint))
-                    { Player.X -= Player.deltaX; Player.Y -= Player.deltaY; }
-                    break;
-
-                case Keys.D:
-                    { Player.angle += 0.1f; if (Player.angle > Math.PI * 2) { Player.angle -= 2 * (float)Math.PI; } if (Player.angle < 0) { Player.angle += 2 * (float)Math.PI; } Player.deltaX = (float)Math.Cos(Player.angle) * 5; Player.deltaY = (float)(Math.Sin(Player.angle) * 5); };
-                    break;
-
-            }
-        }
 
 
 
@@ -286,17 +248,21 @@ namespace MapCreator
         {
             glClearColor(col[index].X, col[index].Y, col[index].Z, col[index].W);
         }
-
-        static double temp;
         static void ShowFPS(GLFW.Window w)
         {   
             var fps = (1/Game.GameTime.DeltaTime);
-            
                 Glfw.SetWindowTitle(DisplayManager.Window, "Test | FPS: " + ((int)fps));
-
-            temp = GameTime.TotalElapsedSec;
         }
 
+        protected override void KeyCallback(Window window, Keys key, int scanCode, InputState state, ModifierKeys mods)
+        {
+            Wolf3D.Movment.Callback(window, key, scanCode, state, mods);
+        }
         public Test(int initialWindowWidth, int initialWindowHeight, string initialWindowTitle) : base(initialWindowWidth, initialWindowHeight, initialWindowTitle) { }
+        protected override void Initialize() 
+        {
+            Player.X = 300;
+            Player.Y = 300;
+        }
     }
 }

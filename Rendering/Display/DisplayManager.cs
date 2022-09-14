@@ -31,7 +31,7 @@ namespace MapCreator.Rendering.Display
             WindowSize= new Vector2(width, height);
 
             glViewport(0,0,width,height);
-            Glfw.SwapInterval(0); //Vsync switch
+            Glfw.SwapInterval(1); //Vsync switch
         }
          public static void CloseWindow() 
         {

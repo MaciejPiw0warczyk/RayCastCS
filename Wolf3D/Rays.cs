@@ -24,7 +24,7 @@ namespace MapCreator.Wolf3D
             ra = Player.angle - Radians(1f) * 30;
             if (ra < 0) { ra += 2 * Math.PI; }
             if (ra > 2 * Math.PI) { ra -= 2 * Math.PI; }
-            for (int i = 0; i < 120; i++)
+            for (int i = 0; i < 240; i++)
             {
                 //--Horizontal check--
                 dof = 0;
@@ -93,27 +93,27 @@ namespace MapCreator.Wolf3D
 
                 float[] Floor =
                 {
-                    i*4+530,     DisplayManager.WindowSize.Y, .6f,.4f,.5f,
-                    i*4+530,     lineOffset+lineH,            .6f,.4f,.5f,
-                    (i+1)*4+530, lineOffset+lineH,            .6f,.4f,.5f,
+                    i*2+530,     DisplayManager.WindowSize.Y, .6f,.4f,.5f,
+                    i*2+530,     lineOffset+lineH,            .6f,.4f,.5f,
+                    (i+1)*2+530, lineOffset+lineH,            .6f,.4f,.5f,
 
-                    (i+1)*4+530, lineOffset+lineH,            .6f,.4f,.5f,
-                    (i+1)*4+530, DisplayManager.WindowSize.Y, .6f,.4f,.5f,
-                    i*4+530,     DisplayManager.WindowSize.Y, .6f,.4f,.5f,
+                    (i+1)*2+530, lineOffset+lineH,            .6f,.4f,.5f,
+                    (i+1)*2+530, DisplayManager.WindowSize.Y, .6f,.4f,.5f,
+                    i*2+530,     DisplayManager.WindowSize.Y, .6f,.4f,.5f,
                 };
                 SWF.AddRange(Floor);
                 //FillPolygon(Floor, Vector3.Presets.Mint);
-                //DrawLine(new Vector2(i *4+530, DisplayManager.WindowSize.Y), new Vector2(i * 4 + 530, (int)(lineOffset + lineH)), Vector3.Presets.Red);
+                //DrawLine(new Vector2(i *2+530, DisplayManager.WindowSize.Y), new Vector2(i * 4 + 530, (int)(lineOffset + lineH)), Vector3.Presets.Red);
 
                 float[] Sealing =
                 {
-                    i*4+530,      0,          0,1,0,
-                    i*4+530,      lineOffset, 0,1,0,
-                    (i+1)*4+ 530, lineOffset, 0,1,0,
+                    i*2+530,      0,          0,1,0,
+                    i*2+530,      lineOffset, 0,1,0,
+                    (i+1)*2+ 530, lineOffset, 0,1,0,
 
-                    (i+1)*4+ 530, lineOffset, 0,1,0,
-                    (i+1)*4+530,  0,          0,1,0,
-                    i*4+530,      0,          0,1,0,
+                    (i+1)*2+ 530, lineOffset, 0,1,0,
+                    (i+1)*2+530,  0,          0,1,0,
+                    i*2+530,      0,          0,1,0,
 
                 };
                 SWF.AddRange(Sealing);
@@ -123,20 +123,20 @@ namespace MapCreator.Wolf3D
 
                 float[] Wall =
                 {
-                    i*4+530,     lineOffset,         col.X, col.Y,col.Z,
-                    i*4+530,     lineH + lineOffset, col.X, col.Y,col.Z,
-                    (i+1)*4+530, lineH + lineOffset, col.X, col.Y,col.Z,
+                    i*2+530,     lineOffset,         col.X, col.Y,col.Z,
+                    i*2+530,     lineH + lineOffset, col.X, col.Y,col.Z,
+                    (i+1)*2+530, lineH + lineOffset, col.X, col.Y,col.Z,
 
-                    (i+1)*4+530, lineH + lineOffset, col.X, col.Y,col.Z,
-                    i*4+530,     lineOffset,         col.X, col.Y,col.Z,
-                    (i+1)*4+530, lineOffset,         col.X, col.Y,col.Z,
+                    (i+1)*2+530, lineH + lineOffset, col.X, col.Y,col.Z,
+                    i*2+530,     lineOffset,         col.X, col.Y,col.Z,
+                    (i+1)*2+530, lineOffset,         col.X, col.Y,col.Z,
                 };
                 SWF.AddRange(Wall);
                 //FillPolygon(Wall, col);
 
 
 
-                ra += Radians(.5f);
+                ra += Radians(.25f);
                 if (ra < 0) { ra += 2 * Math.PI; }
                 if (ra > 2 * Math.PI) { ra -= 2 * Math.PI; }
 
