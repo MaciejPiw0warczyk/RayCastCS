@@ -22,8 +22,8 @@ namespace MapCreator.Game
             Initialize();
 
             DisplayManager.CreateWindow(InitialWindowWidth,InitialWindowHeight,InitialWindowTitle);
-            Glfw.SetKeyCallback(DisplayManager.Window, KeyCallback);
-
+            //Glfw.SetKeyCallback(DisplayManager.Window, KeyCallback);
+            SubscribeToWindowEvents();
 
             LoadContent();
 
@@ -48,8 +48,14 @@ namespace MapCreator.Game
 
 
 
-        protected abstract void KeyCallback(Window window, Keys key, int scanCode, InputState state, ModifierKeys mods);
-
+        //protected abstract void KeyCallback(Window window, Keys key, int scanCode, InputState state, ModifierKeys mods);
+        private static void SubscribeToWindowEvents()
+        {
+            DisplayManager.Window.KeyPress += Wolf3D.Movment.OnWindowKeyPress;
+            //DisplayManager.Window.SizeChanged += Program.OnWindowsSizeChanged;
+            //DisplayManager.Window.Refreshed += Program.OnWindowRefreshed;
+            //DisplayManager.Window.MouseMoved += Program.OnWindowMouseMoved;
+        }
         protected abstract void Initialize();
         protected abstract void LoadContent();
 

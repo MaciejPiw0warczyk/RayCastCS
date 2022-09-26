@@ -1,11 +1,31 @@
 ﻿using System;
 using GLFW;
+using MapCreator.Rendering.Display;
 using static OpenGL.GL;
 
 namespace MapCreator.Wolf3D
 {
     static class Movment
     {
+        //--- Movment using NativeWindow.cs ---
+        private static Keys? lastKeyPressed;
+
+        static public void OnWindowKeyPress(object sender, KeyEventArgs e)
+        {
+            lastKeyPressed = e.Key;
+            if (e.Key == Keys.Enter || e.Key == Keys.NumpadEnter)
+            {
+                DisplayManager.Window.Close();
+            }
+        }
+        static public void MovePlayer() { }
+        //--- Movment using NativeWindow.cs ---
+
+
+
+
+        //--- Old Movment technique ---
+        /*
         public static int W, A, S, D, P=1;
         public static void Callback(Window window, Keys key, int scanCode, InputState state, ModifierKeys mods)
         {
@@ -51,9 +71,10 @@ namespace MapCreator.Wolf3D
                     break;
 
                 default: break;
-            }
-        }
-        static public void MovePlayer()
+    }
+
+
+    static public void MovePlayer()
         {
             Player.deltaX = (float)Math.Cos(Player.angle) * 1.5f; 
             Player.deltaY = (float)(Math.Sin(Player.angle) * 1.5f);
@@ -72,5 +93,7 @@ namespace MapCreator.Wolf3D
             if (D == 1)
                 { Player.angle += 0.05f; if (Player.angle > Math.PI * 2) { Player.angle -= 2 * (float)Math.PI; } if (Player.angle < 0) { Player.angle += 2 * (float)Math.PI; } }
         }
+            }*/
+        //--- Old Movment technique ---
     }
 }

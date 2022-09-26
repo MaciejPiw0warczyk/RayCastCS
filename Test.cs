@@ -258,10 +258,12 @@ namespace MapCreator
                 Glfw.SetWindowTitle(DisplayManager.Window, "Test | FPS: " + ((int)fps));
         }
 
+        /*
         protected override void KeyCallback(Window window, Keys key, int scanCode, InputState state, ModifierKeys mods)
         {
             Wolf3D.Movment.Callback(window, key, scanCode, state, mods);
         }
+        */
         public Test(int initialWindowWidth, int initialWindowHeight, string initialWindowTitle) : base(initialWindowWidth, initialWindowHeight, initialWindowTitle) { }
         protected override void Initialize() 
         {
@@ -277,7 +279,6 @@ namespace MapCreator
 
             fxChannel = new NAudio.Wave.WaveChannel32(gunshot, .1f, 0);
             musicChannel.Init(new NAudio.Wave.WaveChannel32(audio1, .1f, 0));
-
         }
 
         public static NAudio.Wave.DirectSoundOut soundFx = null;
