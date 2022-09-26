@@ -51,7 +51,7 @@ namespace MapCreator.Game
         //protected abstract void KeyCallback(Window window, Keys key, int scanCode, InputState state, ModifierKeys mods);
         private static void SubscribeToWindowEvents()
         {
-            DisplayManager.Window.KeyPress += Wolf3D.Movment.OnWindowKeyPress;
+            DisplayManager.Window.KeyAction += Wolf3D.Movment.OnWindowKeyAction;
             //DisplayManager.Window.SizeChanged += Program.OnWindowsSizeChanged;
             //DisplayManager.Window.Refreshed += Program.OnWindowRefreshed;
             //DisplayManager.Window.MouseMoved += Program.OnWindowMouseMoved;
