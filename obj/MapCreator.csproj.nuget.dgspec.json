@@ -40,6 +40,26 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "NAudio.Asio": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "NAudio.Core": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "NAudio.Midi": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "NAudio.Wasapi": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "NAudio.WinMM": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "System.Drawing.Common": {
               "target": "Package",
               "version": "[6.0.0, )"

@@ -1,19 +1,22 @@
 ﻿using GLFW;
+using System;
 using System.Numerics;
+using System.Drawing;
+using System.Collections.Generic;
 using static OpenGL.GL;
 
 namespace MapCreator.Rendering.Display
 {
-    static class DisplayManager
+    static unsafe class DisplayManager
     {
         public static Window Window { get; set; }
         public static Vector2 WindowSize { get; set; }
 
-        public static void CreateWindow(int width, int height, string title) 
+        public static void CreateWindow(int width, int height, string title)
         {
             Glfw.Init();
 
-            Glfw.WindowHint(Hint.ContextVersionMajor,3);
+            Glfw.WindowHint(Hint.ContextVersionMajor, 3);
             Glfw.WindowHint(Hint.ContextVersionMinor, 3);
             Glfw.WindowHint(Hint.OpenglProfile, Profile.Core);
             Glfw.WindowHint(Hint.Resizable, false);
@@ -21,19 +24,18 @@ namespace MapCreator.Rendering.Display
 
             Window = Glfw.CreateWindow(width, height, title, Monitor.None, Window.None);
 
-
             if (Window == Window.None)
                 return;
 
             Glfw.MakeContextCurrent(Window);
             Import(Glfw.GetProcAddress);
 
-            WindowSize= new Vector2(width, height);
+            WindowSize = new Vector2(width, height);
 
-            glViewport(0,0,width,height);
+            glViewport(0, 0, width, height);
             Glfw.SwapInterval(1); //Vsync switch
         }
-         public static void CloseWindow() 
+        public static void CloseWindow()
         {
             Glfw.Terminate();
         }

@@ -1,12 +1,13 @@
 ﻿using GLFW;
 using System;
-using System.Collections.Generic;
+using NAudio;
 using System.Numerics;
+using System.Collections.Generic;
 using MapCreator.Game;
+using MapCreator.Wolf3D;
 using MapCreator.Rendering.Display;
 using MapCreator.Rendering.Shaders;
 using MapCreator.Rendering.Cameras;
-using MapCreator.Wolf3D;
 using static OpenGL.GL;
 
 namespace MapCreator
@@ -173,8 +174,10 @@ namespace MapCreator
             SWFVAO.LinkVBO(SWFVBO, 0);
             SWFVAO.Unbind();
 
-            { 
-                ShowFPS(DisplayManager.Window);
+            ShowFPS(DisplayManager.Window);
+            
+            /*            
+                { 
                 Console.WriteLine(Player.X);
                 Console.WriteLine(Player.Y);
                 Console.WriteLine(Player.angle);
@@ -183,7 +186,8 @@ namespace MapCreator
                 Console.WriteLine(Movment.S);
                 Console.WriteLine(Movment.D);
                 Console.SetCursorPosition(0, 0);
-            }
+                }
+            */
         }
 
 
@@ -263,6 +267,23 @@ namespace MapCreator
         {
             Player.X = 300;
             Player.Y = 300;
+            Player.pos = new Vector2(300, 300);
+
+            audio1 = new NAudio.Wave.WaveFileReader("src/snd/audio1.wav");
+            gunshot = new NAudio.Wave.WaveFileReader("src/snd/gunshot.wav");
+
+            soundFx =      new NAudio.Wave.DirectSoundOut();
+            musicChannel = new NAudio.Wave.DirectSoundOut();
+
+            fxChannel = new NAudio.Wave.WaveChannel32(gunshot, .1f, 0);
+            musicChannel.Init(new NAudio.Wave.WaveChannel32(audio1, .1f, 0));
+
         }
+
+        public static NAudio.Wave.DirectSoundOut soundFx = null;
+        public static NAudio.Wave.DirectSoundOut musicChannel = null;
+        public static NAudio.Wave.WaveChannel32 fxChannel = null;
+        public static NAudio.Wave.WaveFileReader audio1 = null;
+        public static NAudio.Wave.WaveFileReader gunshot = null;
     }
 }

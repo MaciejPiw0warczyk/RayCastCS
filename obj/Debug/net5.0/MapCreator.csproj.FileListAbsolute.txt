@@ -42,3 +42,8 @@ H:\DEV\RayCastCS 0.1\obj\Debug\net5.0\MapCreator.csproj.CopyComplete
 H:\DEV\RayCastCS 0.1\obj\Debug\net5.0\MapCreator.dll
 H:\DEV\RayCastCS 0.1\obj\Debug\net5.0\ref\MapCreator.dll
 H:\DEV\RayCastCS 0.1\obj\Debug\net5.0\MapCreator.genruntimeconfig.cache
+H:\DEV\RayCastCS 0.1\bin\Debug\net5.0\NAudio.Asio.dll
+H:\DEV\RayCastCS 0.1\bin\Debug\net5.0\NAudio.Core.dll
+H:\DEV\RayCastCS 0.1\bin\Debug\net5.0\NAudio.Midi.dll
+H:\DEV\RayCastCS 0.1\bin\Debug\net5.0\NAudio.Wasapi.dll
+H:\DEV\RayCastCS 0.1\bin\Debug\net5.0\NAudio.WinMM.dll

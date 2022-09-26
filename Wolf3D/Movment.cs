@@ -6,7 +6,7 @@ namespace MapCreator.Wolf3D
 {
     static class Movment
     {
-       public static int W, A, S, D;
+        public static int W, A, S, D, P=1;
         public static void Callback(Window window, Keys key, int scanCode, InputState state, ModifierKeys mods)
         {
             switch (key)
@@ -38,6 +38,18 @@ namespace MapCreator.Wolf3D
                     else if (state == InputState.Release)
                         D = 0;
                     break;
+
+                case Keys.P:
+                    if (state == InputState.Press)
+                        P ++;
+                    if(P%2==0)
+                        Test.musicChannel.Play();
+                    else
+                        Test.musicChannel.Pause();
+                    Console.WriteLine(P);
+                    Console.WriteLine(P%2);
+                    break;
+
                 default: break;
             }
         }
