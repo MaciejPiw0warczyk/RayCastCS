@@ -1,8 +1,5 @@
 ﻿using GLFW;
-using System;
 using System.Numerics;
-using System.Drawing;
-using System.Collections.Generic;
 using static OpenGL.GL;
 
 namespace MapCreator.Rendering.Display
