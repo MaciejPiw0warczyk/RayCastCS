@@ -16,11 +16,12 @@ namespace MapCreator
     {
         Shader shader;
         Camera2D cam;
-        VAO VAO, UpdateVAO, LineVAO,SWFVAO;
-        VBO VBO, UpdateVBO, LineVBO,SWFVBO;
+        VAO VAO, UpdateVAO, LineVAO, SWFVAO, UIVAO;
+        VBO VBO, UpdateVBO, LineVBO, SWFVBO, UIVBO;
         float[] playervert;
         float[] RayVert;
         float[] SWFVert;
+        float[] UIVVert;
         float[] tri;
         public enum Color
         {
@@ -35,7 +36,7 @@ namespace MapCreator
             mint = 8,
         }
 
-        static Vector4[] col =
+        static readonly Vector4[] col =
         {
             new Vector4(0,0,0,1f),
             new Vector4(1, 0, 0, 1f),
@@ -60,6 +61,7 @@ namespace MapCreator
             SWFVAO = new();
             LineVAO = new();
             UpdateVAO = new();
+            UIVAO = new();
 
             VAO.Bind();
 
@@ -112,11 +114,16 @@ namespace MapCreator
             glDrawArrays(GL_LINES,0,RayVert.Length);
             LineVAO.Unbind();
 
+            UIVAO.Bind();
+            glDrawArrays(GL_TRIANGLES, 0, UIVVert.Length);
+            UIVAO.Unbind();
 
+            //TODO: make this a loop
             VBO.Delete();
             LineVBO.Delete();
             UpdateVBO.Delete();
             SWFVBO.Delete();
+            UIVBO.Delete();
 
             Glfw.SwapBuffers(DisplayManager.Window);
         }
@@ -130,9 +137,8 @@ namespace MapCreator
             Colision.ColisionPoint = new Vector2((int)(Player.X + (Player.deltaX) * 5), (int)(Player.Y + (Player.deltaY) * 5));
             Colision.NegativeColisionPoint = new Vector2((int)(Player.X - (Player.deltaX) * 5), (int)(Player.Y - (Player.deltaY) * 5));
 
-
+            //LINKING MAP TO VAO  TODO: stop showing this, seperate window?
             VAO.Bind();
-
             fixed (float* v = &tri[0])
             {
                 VBO = new(v, sizeof(float) * tri.Length);
@@ -141,7 +147,10 @@ namespace MapCreator
 
             VAO.Unbind();
             VBO.Unbind();
+            //-------------
 
+
+            //LINKING PLAYER DOT SHOWN ON THE MAP  TODO: SAME AS MAP
             playervert = DrawPlayer();
             UpdateVAO.Bind();
 
@@ -153,7 +162,10 @@ namespace MapCreator
 
             UpdateVAO.Unbind();
             UpdateVBO.Unbind();
+            //-------------
 
+
+            //LINKING RAYS SHOWN ON THE MAP  TODO: SAME AS MAP
             RayVert = Rays.DrawWalls().ToArray();
             LineVAO.Bind();
 
@@ -163,8 +175,11 @@ namespace MapCreator
             }
             LineVAO.LinkVBO(LineVBO, 0);
             LineVAO.Unbind();
+            //-------------
 
-            SWFVert= Rays.SWF.ToArray();
+
+            //LINKING SEALING WALLS AND FLOUR INTO VAO 
+            SWFVert = Rays.SWF.ToArray();
             SWFVAO.Bind();
 
             fixed (float* v = &SWFVert[0])
@@ -173,10 +188,23 @@ namespace MapCreator
             }
             SWFVAO.LinkVBO(SWFVBO, 0);
             SWFVAO.Unbind();
+            //-------------
 
-            ShowFPS(DisplayManager.Window);
+            //UI elements TODO find proper way to display this
+            UIVVert = UI.DrawUI();
+            UIVAO.Bind();
+            fixed (float* v = &UIVVert[0])
+            {
+                UIVBO = new(v, sizeof(float) * UIVVert.Length);
+            }
+            UIVAO.LinkVBO(UIVBO,0);
+            UIVAO.Unbind();
+            //-------------
+
+
+            ShowFPS();
             
-            /*            
+            /*  DEBUG STUF      
                 { 
                 Console.WriteLine(Player.X);
                 Console.WriteLine(Player.Y);
@@ -252,7 +280,7 @@ namespace MapCreator
         {
             glClearColor(col[index].X, col[index].Y, col[index].Z, col[index].W);
         }
-        static void ShowFPS(GLFW.Window w)
+        static void ShowFPS()
         {   
             var fps = (1/Game.GameTime.DeltaTime);
                 Glfw.SetWindowTitle(DisplayManager.Window, "Test | FPS: " + ((int)fps));
@@ -280,7 +308,7 @@ namespace MapCreator
             fxChannel = new NAudio.Wave.WaveChannel32(gunshot, .1f, 0);
             musicChannel.Init(new NAudio.Wave.WaveChannel32(audio1, .1f, 0));
         }
-
+        //NAUDIO STUF
         public static NAudio.Wave.DirectSoundOut soundFx = null;
         public static NAudio.Wave.DirectSoundOut musicChannel = null;
         public static NAudio.Wave.WaveChannel32 fxChannel = null;

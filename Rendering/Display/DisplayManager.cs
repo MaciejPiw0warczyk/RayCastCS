@@ -34,7 +34,9 @@ namespace MapCreator.Rendering.Display
 
         public static void CloseWindow()
         {
-            Glfw.Terminate();
+            //Glfw.Terminate();
+            Window.Dispose();
+            Window.Close();
         }
     }
 }

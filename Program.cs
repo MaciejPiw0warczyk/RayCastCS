@@ -4,9 +4,11 @@
     {
         public static void Main()
         {
-            Test game = new(1024, 512, "MapCreator");
+            Test game = new(1280, 562, "MapCreator");
 
             game.Run();
+
+            MapCreator.Rendering.Display.DisplayManager.CloseWindow();
         }
     }
 }

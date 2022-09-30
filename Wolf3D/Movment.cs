@@ -7,8 +7,6 @@ namespace MapCreator.Wolf3D
 {
     static class Movment
     {
-        //--- Movment using NativeWindow.cs ---
-        private static Keys? lastKeyPressed;
         public static int W, A, S, D, P = 1;
 
         static public void OnWindowKeyAction(object sender, KeyEventArgs e)
@@ -53,6 +51,10 @@ namespace MapCreator.Wolf3D
                         Test.musicChannel.Pause();
                     Console.WriteLine(P);
                     Console.WriteLine(P % 2);
+                    break;
+
+                case Keys.Escape:
+                    DisplayManager.CloseWindow();
                     break;
 
                 default: break;
